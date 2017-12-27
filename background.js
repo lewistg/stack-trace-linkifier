@@ -5,10 +5,10 @@ chrome.runtime.onConnect.addListener(function(devToolsPort) {
     let tabId;
     let contentScriptPort;
     function devToolsListener(message, sender, sendResponse) {
-        tabId = message.tabId;
+        tabId = message.inspectedTabId;
         chrome.tabs.executeScript(
-            message.tabId, 
-            {file: message.scriptToInject},
+            message.inspectedTabId, 
+            {file: './content_script.js'},
             onContentScriptExecuted
         );
     }
