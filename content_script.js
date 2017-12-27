@@ -15,14 +15,14 @@ function visit(node) {
     if (!(node instanceof Text) || !stackTracePattern.test(node.data)) {
         return;
     }
-    resetRegExp(stackTracePattern);
+
     let dataWithLinks = htmlEscape(node.data);
+    resetRegExp(stackTracePattern);
     dataWithLinks = dataWithLinks.replace(stackTracePattern, `<span class="${linkClass}" style="text-decoration: underline; cursor: pointer">$&</span>`);
-    if (dataWithLinks == node.data) {
-        return;
-    }
+
     const nodes = parseHTMLString(dataWithLinks);
     replaceNodeWithNodes(node, nodes);
+
     addLinkListeners(nodes);
 }
 
