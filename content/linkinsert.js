@@ -2,7 +2,6 @@ import * as util from './util.js';
 
 const stackFramePattern = /at.*\(((http|https):\/\/.*):(\d+):\d+\)/g;
 const linkClass = '_λ_stack_trace_link_λ_';
-let backgroundPagePort;
 
 export function insertLinks(rootNodes, openSourceFile) {
     const childQueue = rootNodes || [];
