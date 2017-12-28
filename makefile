@@ -4,7 +4,7 @@ CONTENT=content
 extension: $(DIST)/.extension
 
 $(DIST)/.extension: $(DIST)/content_script.js background.js devtools.js devtools.html manifest.json icon32.png
-	cp $(wordlist 2, 6, $^) $(DIST)
+	cp $(wordlist 2, $(words $^), $^) $(DIST)
 	touch $@
 
 $(DIST)/content_script.js: $(CONTENT)/main.js
@@ -12,4 +12,4 @@ $(DIST)/content_script.js: $(CONTENT)/main.js
 
 .PHONY: clean
 clean:
-	rm -rf $(DIST)/*
+	find dist -type f -exec test {} != "dist/.gitignore" \; -and -exec rm -rf {} \;
