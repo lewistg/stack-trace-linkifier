@@ -7,8 +7,8 @@ $(DIST)/.extension: $(DIST)/content_script.js background.js devtools.js devtools
 	cp $(wordlist 2, $(words $^), $^) $(DIST)
 	touch $@
 
-$(DIST)/content_script.js: $(CONTENT)/main.js
-	rollup $< --output.format iife --output.file $@
+$(DIST)/content_script.js: $(CONTENT)/*
+	rollup $(CONTENT)/main.js --output.format iife --output.file $@
 
 .PHONY: clean
 clean:
