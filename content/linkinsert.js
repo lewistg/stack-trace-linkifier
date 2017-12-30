@@ -1,14 +1,12 @@
 import * as Util from './util.js';
 
 export function insertLinks(rootNodes, openSourceFile) {
-    setTimeout(function() {
-        const childQueue = rootNodes || [];
-        while (childQueue.length > 0) {
-            let c = childQueue.pop();
-            childQueue.push(...(c.childNodes || []));
-            visit(c, openSourceFile);
-        }
-    }, 1000);
+    const childQueue = rootNodes || [];
+    while (childQueue.length > 0) {
+        let c = childQueue.pop();
+        childQueue.push(...(c.childNodes || []));
+        visit(c, openSourceFile);
+    }
 }
 function visit(node, openSourceFile) {
     if (!(node instanceof Text) || !StackFramePatterns.stackFrame.test(node.data)) {
