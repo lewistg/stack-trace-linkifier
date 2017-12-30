@@ -3,7 +3,7 @@
   "name": "Stack Trace Linkifier",
   "description": "Turn stack frames in JavaScript stack traces into links to the source.",
   "version": "1.0",
-  "permissions": ["tabs", "<all_urls>"],
+  "permissions": ["tabs", "<all_urls>", "webNavigation"],
   "minimum_chrome_version": "10.0",
   "background": {
       "persistent": false,
