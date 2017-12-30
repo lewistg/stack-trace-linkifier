@@ -1,9 +1,9 @@
 # Stack Trace Linkifier 
 
-This Chrome extension turns stack frames in stack traces into links to the
-source. This extension was originally written to make it easier to navigate to
-failing [Jasmine](https://jasmine.github.io/) unit test code. (When a test
-fails, Jasmine reports the failure with a stack trace.)
+This Chrome extension linkifies the source code locations in stack trace text
+embedded in web pages. The extension was originally written to make it easier to
+navigate to failing [Jasmine](https://jasmine.github.io/) unit test code. When
+a test fails, Jasmine reports the failure with a stack trace. See it in action:
 
 ![Recording of extension in action](https://github.com/lewistg/stack-trace-links/raw/master/readme-imgs/recording.gif)
 
