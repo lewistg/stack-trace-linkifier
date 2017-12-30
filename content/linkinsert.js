@@ -61,10 +61,19 @@ function getSourceLocation(sourceLocationString) {
 }
 
 export function removeLinks() {
+    let lastParent;
     const links = document.querySelectorAll(`.${linkClass}`);
     links.forEach(function(link) {
+        let nextParent = link.parentElement;
         Util.replaceNodeWithNodes(link, link.childNodes);
+        if (lastParent != nextParent) {
+            lastParent && lastParent.normalize();
+            lastParent = nextParent;
+        }
     });
+    if (lastParent) {
+        lastParent.normalize();
+    }
 }
 
 const linkClass = '_λ_stack_trace_link_λ_';
