@@ -21,7 +21,7 @@ function onLoaded() {
     linkInsert.insertLinks(Array.from(document.body.children), openSourceFile);
     const mutationObserver = new MutationObserver(function(mutationRecords) {
         mutationRecords.forEach(function(mutationRecord) {
-            if (mutationRecords.type == 'childList') {
+            if (mutationRecord.type == 'childList') {
                 linkInsert.insertLinks(Array.from(mutationRecord.addedNodes), openSourceFile);
             }
         });
