@@ -18,7 +18,7 @@ function ContentScriptDevToolsPipe(devToolsPort) {
     /** @private {number} */
     this.inspectedTabId;
     /** @private {function(Object)} */
-    this.tabRefreshListener = (details) => {
+    this.tabNavigationListener = (details) => {
         if (details.tabId == this.inspectedTabId) {
             this.loadContentScript();
         }
@@ -33,8 +33,7 @@ function ContentScriptDevToolsPipe(devToolsPort) {
         this.loadContentScript();
     });
     this.devToolsPort.onDisconnect.addListener((message, sender, sendResponse) => this.onDevToolsClosed());
-    this.handleTabRefresh();
-
+    chrome.webNavigation.onDOMContentLoaded.addListener(this.tabNavigationListener);
 }
 
 /**
@@ -56,17 +55,7 @@ ContentScriptDevToolsPipe.prototype.loadContentScript = function() {
  */
 ContentScriptDevToolsPipe.prototype.onDevToolsClosed = function() {
     this.contentScriptPort.disconnect();
-    chrome.webNavigation.onDOMContentLoaded.removeListener(this.tabRefreshListener);
-}
-
-/**
- * @private
- */
-ContentScriptDevToolsPipe.prototype.handleTabRefresh = function() {
-    chrome.webNavigation.onDOMContentLoaded.addListener(this.tabRefreshListener, {url: [
-        {hostEquals: window.location.host}, 
-        {pathEquals: window.location.pathName},
-    ]});
+    chrome.webNavigation.onDOMContentLoaded.removeListener(this.tabNavigationListener);
 }
 
 /**
