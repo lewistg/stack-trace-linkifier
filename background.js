@@ -42,7 +42,10 @@ function ContentScriptDevToolsPipe(devToolsPort) {
 ContentScriptDevToolsPipe.prototype.loadContentScript = function() {
     chrome.tabs.executeScript(
         this.inspectedTabId,
-        {file: './content_script.js'},
+        {
+            file: './content_script.js',
+            allFrames: true
+        },
         () => {
             this.contentScriptPort = chrome.tabs.connect(this.inspectedTabId);
             this.contentScriptPort.onMessage.addListener((message, sender, sendResponse) => this.pipeMessageToDevTools(message));
