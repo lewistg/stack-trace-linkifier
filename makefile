@@ -18,6 +18,16 @@ $(DIST)/icons: icon.svg
 		inkscape -z -e "$@/$$(basename $< .svg)$$size.png" -w $$size -h $$size $<; \
 	done
 
+PACKAGE=stack-trace-linkifier.zip
+package: stack-trace-linkifier.zip
+$(PACKAGE): extension
+	cd $(DIST); \
+	zip -r $@ . -x .*; \
+	mv $@ ..
+
+clean-package: 
+	rm -rf $(PACKAGE)
+
 .PHONY: clean
-clean:
+clean: clean-package
 	find dist -mindepth 1 -maxdepth 1 -exec test {} != "dist/.gitignore" \; -and -exec rm -rf {} \;
